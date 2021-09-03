@@ -1,0 +1,73 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- general form elements -->
+       
+                <!-- /.card -->
+<div class="card card-primary">
+    <div class="card-header"><h3 class="card-title">{{page_title}}</h3>
+    </div>
+   <div class="table p-2">
+
+       <table class="table table-bordered">
+           <tr>
+               <th>ID</th>
+               <th>Subject</th>
+               <th>First Test</th>
+               <th>Second Test</th>
+               <th>Third Test</th>
+               <th>Exam</th>
+               <th>Total</th>
+        </tr>
+        {% for result in results %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{ result.subject }}</td>
+            <td>{{ result.first_test }}</td>
+            <td>{{ result.second_test }}</td>
+            <td>{{ result.third_test }}</td>
+            <td>{{ result.exam }}</td>
+            <td>{{ result.first_test|add:result.second_test|add:result.third_test|add:result.exam }}</td>
+            <td>{% if result.first_test|add:result.second_test|add:result.third_test|add:result.exam >= 70 %} A 
+                
+                {% elif result.first_test|add:result.second_test|add:result.third_test|add:result.exam >= 60 and result.first_test|add:result.second_test|add:result.third_test|add:result.exam <= 69 %} B 
+
+                {% elif result.first_test|add:result.second_test|add:result.third_test|add:result.exam >= 50 and result.first_test|add:result.second_test|add:result.third_test|add:result.exam <= 59 %} C
+
+                {% elif result.first_test|add:result.second_test|add:result.third_test|add:result.exam >= 45 and result.first_test|add:result.second_test|add:result.third_test|add:result.exam <= 49 %} D
+
+                {% elif result.first_test|add:result.second_test|add:result.third_test|add:result.exam >= 40 and result.first_test|add:result.second_test|add:result.third_test|add:result.exam <= 44 %} E
+
+                {% else %} F    
+                {% endif %}
+            </td>
+            <td>{% if result.first_test|add:result.second_test|add:result.third_test|add:result.exam >= 70 %} Excellent 
+                
+                {% elif result.first_test|add:result.second_test|add:result.third_test|add:result.exam >= 60 and result.first_test|add:result.second_test|add:result.third_test|add:result.exam <= 69 %} Credit 
+
+                {% elif result.first_test|add:result.second_test|add:result.third_test|add:result.exam >= 50 and result.first_test|add:result.second_test|add:result.third_test|add:result.exam <= 59 %} V.Good
+
+                {% elif result.first_test|add:result.second_test|add:result.third_test|add:result.exam >= 45 and result.first_test|add:result.second_test|add:result.third_test|add:result.exam <= 49 %} Good
+
+                {% elif result.first_test|add:result.second_test|add:result.third_test|add:result.exam >= 40 and result.first_test|add:result.second_test|add:result.third_test|add:result.exam <= 44 %} Pass
+
+                {% else %} Fail   
+                {% endif %}
+            </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

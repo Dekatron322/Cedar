@@ -1,0 +1,255 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block content %}
+
+<section class="content">
+      <div class="container-fluid">
+            <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header" style="background-color: #842bd7; color: #fff">
+                <h3 class="card-title">First Term</h3>
+
+                <div class="card-tools">
+                  
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>SN</th>
+                      <th>Student Name</th>
+                      <th>Subjects</th>
+                      <th>First CA</th>
+                      <th>Second CA</th>
+                      <th>Third CA</th>
+                      <th>Exam</th>
+                      <th>Total</th>
+                      <th>Grade</th>
+                      <th>Remark</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for rs in results %}
+
+                        <tr>
+
+                            <td>{{ forloop.counter }}</td>
+                            
+                            <td>{{ rs.student.full_name }}</td>
+                            
+                            <td>{{ rs.subject }}</td>
+                            <td>{{ rs.first_test }}</td>
+                            <td>{{ rs.second_test }}</td>
+                            <td>{{ rs.third_test }}</td>
+                            <td>{{ rs.exam }}</td>
+                            <td>{{ rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam }}</td>           
+                            <td>{% if rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam >= 70 %} A 
+                
+                              {% elif rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam >= 60 and rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam <= 69 %} B 
+
+                              {% elif rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam >= 50 and rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam <= 59 %} C
+
+                              {% elif rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam >= 45 and rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam <= 49 %} D
+
+                              {% elif rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam >= 40 and rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam <= 44 %} E
+
+                              {% else %} F    
+                            {% endif %}
+                          </td>
+                            <td>{% if rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam >= 70 %} Excellent 
+                
+                              {% elif rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam >= 60 and rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam <= 69 %} Credit 
+
+                              {% elif rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam >= 50 and rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam <= 59 %} V.Good
+
+                              {% elif rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam >= 45 and rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam <= 49 %} Good
+
+                              {% elif rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam >= 40 and rs.first_test|add:rs.second_test|add:rs.third_test|add:rs.exam <= 44 %} Pass
+
+                              {% else %} Fail   
+                            {% endif %}
+                          </td>
+                        </tr>
+                        {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header" style="background-color: #842bd7; color: #fff">
+                <h3 class="card-title">Second Term</h3>
+
+                <div class="card-tools">
+                  
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0" style="height: 300px;">
+                <table class="table table-head-fixed text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>SN</th>
+                      <th>Student Name</th>
+                      <th>Subjects</th>
+                      <th>First CA</th>
+                      <th>Second CA</th>
+                      <th>Third CA</th>
+                      <th>Exam</th>
+                      <th>Total</th>
+                      <th>Grade</th>
+                      <th>Remark</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for rs in results %}
+
+                        <tr>
+
+                            <td>{{ forloop.counter }}</td>
+                            
+                            <td>{{ rs.student.full_name }}</td>
+                            
+                            <td>{{ rs.subject }}</td>
+                            <td>{{ rs.first_ca }}</td>
+                            <td>{{ rs.second_ca }}</td>
+                            <td>{{ rs.third_ca }}</td>
+                            <td>{{ rs.examination }}</td>
+                            <td>{{ rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination }}</td>           
+                            <td>{% if rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 70 %} A 
+                
+                              {% elif rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 60 and rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination <= 69 %} B 
+
+                              {% elif rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 50 and rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination <= 59 %} C
+
+                              {% elif rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 45 and rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination <= 49 %} D
+
+                              {% elif rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 40 and rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination <= 44 %} E
+
+                              {% else %} F    
+                            {% endif %}
+                          </td>
+                            <td>{% if rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 70 %} Excellent 
+                
+                              {% elif rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 60 and rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination <= 69 %} Credit 
+
+                              {% elif rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 50 and rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination <= 59 %} V.Good
+
+                              {% elif rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 45 and rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination <= 49 %} Good
+
+                              {% elif rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 40 and rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination <= 44 %} Pass
+
+                              {% else %} Fail   
+                            {% endif %}
+                          </td>
+                        </tr>
+                        {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+        <!-- /.row -->
+
+         <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header" style="background-color: #842bd7; color: #fff">
+                <h3 class="card-title">Third Term</h3>
+
+                <div class="card-tools">
+                  
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>SN</th>
+                      <th>Student Name</th>
+                      <th>Subjects</th>
+                      <th>First CA</th>
+                      <th>Second CA</th>
+                      <th>Third CA</th>
+                      <th>Exam</th>
+                      <th>Total</th>
+                      <th>Grade</th>
+                      <th>Remark</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for rs in results %}
+
+                        <tr>
+
+                            <td>{{ forloop.counter }}</td>
+                            
+                            <td>{{ rs.student.full_name }}</td>
+                            
+                            <td>{{ rs.subject }}</td>
+                            <td>{{ rs.tt_first_test }}</td>
+                            <td>{{ rs.tt_second_test }}</td>
+                            <td>{{ rs.tt_third_test }}</td>
+                            <td>{{ rs.tt_exam }}</td>
+                            <td>{{ rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam }}</td>           
+                            <td>{% if rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam >= 70 %} A 
+                
+                              {% elif rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam >= 60 and rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam <= 69 %} B 
+
+                              {% elif rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam >= 50 and rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam <= 59 %} C
+
+                              {% elif rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam >= 45 and rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam <= 49 %} D
+
+                              {% elif rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam >= 40 and rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam <= 44 %} E
+
+                              {% else %} F    
+                            {% endif %}
+                          </td>
+                            <td>{% if rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam >= 70 %} Excellent 
+                
+                              {% elif rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam >= 60 and rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam <= 69 %} Credit 
+
+                              {% elif rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam >= 50 and rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam <= 59 %} V.Good
+
+                              {% elif rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam >= 45 and rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam <= 49 %} Good
+
+                              {% elif rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam >= 40 and rs.tt_first_test|add:rs.tt_second_test|add:rs.tt_third_test|add:rs.tt_exam <= 44 %} Pass
+
+                              {% else %} Fail   
+                            {% endif %}
+                          </td>
+                        </tr>
+                        {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+        <!-- /.row -->
+
+        </div>
+    </div>
+</div>
+</section>
+            <!-- /.card -->
+
+{% endblock %}
+

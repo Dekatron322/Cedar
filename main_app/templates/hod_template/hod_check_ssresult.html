@@ -1,0 +1,221 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block content %}
+
+<section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card card-primary card-outline">
+
+               <div class="card-header">
+                                                             
+                <h3 class="card-title col-md-3"><img class=" img-bordered-sm" src="https://www.graphicsprings.com/filestorage/stencils/a85b7c149ea786ceeac77c4fa7fd7a56.png?width=500&height=500" height="125px" width="125px" alt="user image"></h3>
+
+                <h1 class="card-title col-md-9 col-12" style="font-size: 30px; font-weight: 900; text-align: center;  color: #842bd7">CEDAR INTERNATIONAL SECONDARY SCHOOL</h1>
+                <br>
+                <h3 class="card-title col-md-9 col-12" style="font-size: 25px; text-align: center; font-weight: 900">BYAZHIN KUBWA-ABUJA, FCT.</h3><br>
+                <h5 class="card-title col-md-9 col-12" style="text-align: center;">Tel: 08139145923, 08039696853</h5>
+                <h5 class="card-title col-md-9 col-12" style="text-align: center; color: #842bd7">Motto: Education for Harmony</h5>
+                
+              </div>
+
+
+              <div class="card-header card-primary card-outline" style="background-color: #842bd7; color: #fff"><span>
+                <h3 class="card-title col-6">Scores: {{ totals }}</h3>
+                
+                <h3 class="card-title">Average Score: {{averaged_format }}</h3>
+
+                </span>
+              </div>
+              <!-- /.card-header -->
+              
+              <div class="card-body">
+                <div class="post">
+                      <div class="user-block">
+                {% if staff.profile_pic == ""  %}
+                 <h3 class="card-title col-2"><img class=" img-bordered-sm" src="https://www.graphicsprings.com/filestorage/stencils/a85b7c149ea786ceeac77c4fa7fd7a56.png?width=500&height=500" height="125px" width="125px" alt="user image"></h3>
+                {% else %}  
+                   <img class="img-bordered-sm" src="{{students.profile_pic}}" height="125px" width="125px" alt="user image">
+                {% endif %}
+                        <span class="username">
+                          <div class="row">
+                <!-- accepted payments column -->
+                <div class="col-6">
+                  <p class="lead">Full name: {{ students.last_name }}</p>
+                  <p class="lead">Class: {{ students.student.student_class.name }}</p>
+                  <p class="lead">Session: {{ students.student.session.start_year }}/ {{ students.student.session.end_year }}</p>
+                  
+                </div>
+                <!-- /.col -->
+                <div class="col-6">
+                  <p class="lead">Firstname: {{ students.first_name }}</p>
+                  <p class="lead">Average: {{averaged_format }}</p>
+                   <p class="lead">Term: Second Term</p>
+                </div>
+                
+              </div>
+                        </span>
+                       
+                      </div>
+                      <!-- /.user-block -->
+
+
+              <div class="card-body table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>Subjects</th>
+                            <th>First CA</th>
+                            <th>Second CA</th>
+                            <th>Third CA</th>
+                            <th>Exam</th>
+                            <th>Total</th>
+                            <th>Obtainable</th>
+                            <th>Grade</th>
+                            <th>Remark</th>
+                        </tr>
+                    </thead>
+                  <tbody>
+
+                    {% for rs in results %}
+                        <tr>
+                            {% if rs.examination ==  0 %}
+                            {% else %}
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ rs.subject }}</td>
+                            <td>{{ rs.first_ca }}</td>
+                            <td>{{ rs.second_ca }}</td>
+                            <td>{{ rs.third_ca }}</td>
+                            <td>{{ rs.examination }}</td>
+                            <td>{{ rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination }}</td>           
+                            <td>100</td>
+                            <td>{% if rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 70 %} A 
+                
+                              {% elif rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 60 and rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination <= 69 %} B 
+
+                              {% elif rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 50 and rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination <= 59 %} C
+
+                              {% elif rs.first_ca|add:rs.second_ca|add:rs.thirdcat|add:rs.examination >= 45 and rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination <= 49 %} D
+
+                              {% elif rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 40 and rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination <= 44 %} E
+
+                              {% else %} F    
+                            {% endif %}
+
+                          </td>
+                            <td>{% if rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 70 %} Excellent 
+                
+                              {% elif rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 60 and rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination <= 69 %} Credit 
+
+                              {% elif rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 50 and rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination <= 59 %} V.Good
+
+                              {% elif rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 45 and rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination <= 49 %} Good
+
+                              {% elif rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination >= 40 and rs.first_ca|add:rs.second_ca|add:rs.third_ca|add:rs.examination <= 44 %} Pass
+
+                              {% else %} Fail   
+                            {% endif %}
+                          </td>
+                          {% endif %}
+                        </tr>
+                        {% endfor %}
+                        
+                  </tbody>
+                </table>
+
+              </div>
+          </div>
+        </div>
+
+ <div class="row">
+          <div class="col-12">
+            <div class="card">
+              
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap" style="background-color: #842bd7; color: #fff">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Total Number of Day School Open:</td>
+                      <td>114</td>
+                      <td>Form Teacher's Remark:</td>
+                      <td><span class="tag tag-success">Approved</span></td>
+                      
+                    </tr>
+                    <tr>
+                      <td>Number of Day's Present</td>
+                      <td>Pending</td>
+                      <td>Number of Day's Absent</td>
+                      <td><span class="tag tag-warning">Pending</span></td>
+                      
+                    </tr>
+                    <tr>
+                      <td>Next Term Begins</td>
+                      <td>123</td>
+                      <td>Mark Obtained</td>
+                      <td><span class="tag tag-primary">Approved</span></td>
+                      
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+        <!-- /.row -->
+         <div class="card-header card-primary card-outline" style="background-color: #fff">
+                <h3 class="card-title">INTERPRETATION OF GRADES </h3>
+            </div>
+                
+              
+              
+        <div class="card-body" style="background-color: #fff; color: #000">
+                <table class="table table-bordered table-hover table-responsive">
+                  <thead>
+                    
+                  </thead>
+                  <tbody>
+                    <tr data-widget="expandable-table" aria-expanded="false">
+                      <td width="30%">80-100 = A (DISTINCTION)</td>
+
+                      <td width="70%">60 - 79 = B (MERIT)</td>
+                    </tr>
+                    <tr data-widget="expandable-table" aria-expanded="false">
+                      <td width="30%">40 - 59 = C (PASS)</td>
+
+                      <td width="70%">0 - 39 = B (FAIL)</td>
+                    </tr>
+                    <tr data-widget="expandable-table"  aria-expanded="false">
+                      <td width="30%" style="padding-top: 50px; padding-bottom: 50px">STAMP AND SIGNATURE</td>
+
+                      <td width="70%" style="align-items: center; justify-content: center; margin-left: 20px"><img style="align-items: center; justify-content: center; margin-left: 20px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoai452vzaevrwJitEvtMahE7Ii4EepK03YQ&usqp=CAU"> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+            <!-- /.card -->
+
+{% endblock %}
+
